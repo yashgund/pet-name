@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState} from 'react'
 
 function App() {
-  const petDetails = [
+  let petDetails = [
    { name: 'Buddy',
     age: 2},
     {
@@ -15,20 +15,17 @@ function App() {
       age: 1
     }
 ]
-const [pet, setPet] = useState(petDetails)
-useEffect(() => {
-  return () => {
-    pet
-  };
-}, []);
 
-function sortArr(pet){
-  pet.sort((a, b)=>(
+let [pet, setPet] = useState(petDetails)
+
+const sortArr = ()=>{
+  let pet1 =pet.sort((a, b)=>(
     a.age > b.age ? 1 : -1
   ));
-  setPet(pet)
-  console.log(petDetails);
-  console.log('hi');
+  console.log(pet1);
+  setPet([...pet1])
+  console.log(pet);
+  // console.log('hi');
 }
 
 // sortArr()
@@ -42,7 +39,7 @@ function sortArr(pet){
         </tr>
       </th>
       <tbody>
-        {petDetails && petDetails.map((ele)=>(
+        {pet && pet.map((ele)=>(
           <tr key={ele.age}>
           <td>{ele.name}</td>
           <td>{ele.age}</td>
@@ -50,9 +47,9 @@ function sortArr(pet){
         ))}  
       </tbody>
      </table>
-     <button onClick = {()=>(
-      sortArr(petDetails)
-  )}>sort</button>
+     <button onClick = {
+      sortArr
+  }>sort</button>
     </div>
   );
 }
